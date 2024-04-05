@@ -14,6 +14,7 @@
 /*--------- Main ---------------------*/
 int main(int argc, char* argv[])
 {
+    srand(time(NULL));
     SDL_Window *pWindow;
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -64,12 +65,17 @@ int main(int argc, char* argv[])
         // FIN de vos variables                                                              */
         /**********************************************************************/
         TListePlayer player;
-        player = NULL;
-        setSuiv(player, NULL);
+        initListe(&player);
+        player = ajoutEnTete(player,jeu[5][14]);
+        int elixirPlayer1, elixirPlayer2 = 0;
+        int* elixir1 = elixirPlayer1;
+        int* elixir2 = elixirPlayer2;
         // boucle principale du jeu
+        int boucle = 0;
         int cont = 1;
         while ( cont != 0 ){   //VOUS DEVEZ GERER (DETECTER) LA FIN DU JEU -> tourRoiDetruite
                 SDL_PumpEvents(); //do events
+                elixirPlayer1, elixirPlayer2 ++;
 
 
                 /***********************************************************************/
@@ -81,9 +87,15 @@ int main(int argc, char* argv[])
                 // FIN DE VOS APPELS
                 /***********************************************************************/
                 //affichage du jeu à chaque tour
-                sleep(5);
-                supprimerUnite(player, jeu[5][14], jeu);
-                jeu[5][14] = NULL;
+                if(boucle==0){
+                    int x = getPosx(jeu[5][14]);
+                    int y = getPosy(jeu[5][14]);
+                    Move(jeu[5][14],jeu,2,x,y);
+                    sleep(2);
+                    supprimerUnite(player, jeu[5][14],jeu);
+                    boucle = 1;
+                    printf("4");
+                }
                 efface_fenetre(pWinSurf);
                 prepareAllSpriteDuJeu(jeu,LARGEURJEU,HAUTEURJEU,TabSprite,pWinSurf);
                 maj_fenetre(pWindow);

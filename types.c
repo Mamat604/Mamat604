@@ -1,7 +1,12 @@
 #include "types.h"
 
-Tunite* getPdata(TListePlayer liste){
-    return liste->pdata;
+TListePlayer getSuivant(TListePlayer x){
+    return x->suiv;
+}
+
+
+Tunite *getPdata(TListePlayer x){
+    return x->pdata;
 }
 
 TuniteDuJeu getNom(Tunite *x){
@@ -52,11 +57,11 @@ int getCoutElixir(Tunite *x){
     return x->coutEnElixir;
 }
 
-void setPrec(TListePlayer x, TListePlayer y){
-    x->prec = y;
+int getTeam(Tunite *x){
+    return x->team;
 }
 
-void setSuiv(TListePlayer x, TListePlayer y){
+void setSuivant(TListePlayer x, TListePlayer y){
     x->suiv = y;
 }
 
@@ -110,4 +115,8 @@ void setPeutAttaquer(Tunite *x, int oof){
 
 void setCoutElixir(Tunite *x, int prix){
     x->coutEnElixir = prix;
+}
+
+void setTeam(Tunite *x, int equipe){
+    x->team = equipe;
 }

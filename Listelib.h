@@ -8,11 +8,11 @@ void initListe(T_liste *l);
 
 bool listeVide(T_liste l);
 
-T_liste ajoutEnTete(T_liste l, Tunite mydata);
+T_liste ajoutEnTete(T_liste l, Tunite *mydata);
 
-T_liste ajoutEnFin(T_liste l, Tunite mydata);
+T_liste ajoutEnFin(T_liste l, Tunite *mydata);
 
-T_liste ajoutEnN(T_liste l,int pos, Tunite mydata);
+T_liste ajoutEnN(T_liste l,int pos, Tunite *mydata);
 
 T_liste SuppEnTete(T_liste l);
 
@@ -35,5 +35,7 @@ int getSizeBytes(T_liste l);
 T_liste creatNewListeFromFusion(T_liste l1,T_liste l2);
 
 T_liste addBehind(T_liste debut,T_liste suite);
+
+T_liste findCell(T_liste l, Tunite *data);
 
 #endif // LISTELIB_H_INCLUDED

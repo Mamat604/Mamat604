@@ -14,10 +14,9 @@ bool listeVide(T_liste l){
     return (l==NULL);
 }
 
-T_liste ajoutEnTete(T_liste l, Tunite mydata){
+T_liste ajoutEnTete(T_liste l, Tunite *mydata){
     T_liste nouv = (T_liste)malloc(sizeof(struct T_Cell));
-    nouv->pdata = (Tunite*)malloc(sizeof(Tunite));
-    *(nouv->pdata) = mydata;
+    nouv->pdata = mydata;
 
     nouv->suiv = l;
     nouv->prec = NULL;
@@ -27,10 +26,9 @@ T_liste ajoutEnTete(T_liste l, Tunite mydata){
     return nouv;
 }
 
-T_liste ajoutEnFin(T_liste l, Tunite mydata){
+T_liste ajoutEnFin(T_liste l, Tunite *mydata){
     T_liste nouv = (T_liste)malloc(sizeof(struct T_Cell));
-    nouv->pdata = (Tunite*)malloc(sizeof(Tunite));
-    *(nouv->pdata) = mydata;
+    nouv->pdata = mydata;
 
     if(l==NULL){
         nouv->prec=NULL;
@@ -49,10 +47,9 @@ T_liste ajoutEnFin(T_liste l, Tunite mydata){
     return l;
 }
 
-T_liste ajoutEnN(T_liste l,int pos, Tunite mydata){
-    T_liste nouv = ((T_liste)malloc(sizeof(struct T_Cell)));
-    nouv->pdata = (Tunite*)malloc(sizeof(Tunite));
-    *(nouv->pdata) = mydata;
+T_liste ajoutEnN(T_liste l,int pos, Tunite *mydata){
+    T_liste nouv = (T_liste)malloc(sizeof(struct T_Cell));
+    nouv->pdata = mydata;
 
     if(l==NULL){
         nouv->prec=NULL;
@@ -199,11 +196,11 @@ T_liste creatNewListeFromFusion(T_liste l1,T_liste l2){
     T_liste nouv;initListe(&nouv);
     T_liste l1bis=l1;T_liste l2bis=l2;
     while(l1bis!=NULL){
-        nouv=ajoutEnFin(nouv,*(l1bis->pdata));
+        nouv=ajoutEnFin(nouv,l1bis->pdata);
         l1bis=l1bis->suiv;
     }
     while(l2bis!=NULL){
-        nouv=ajoutEnFin(nouv,*(l2bis->pdata));
+        nouv=ajoutEnFin(nouv,l2bis->pdata);
         l2bis=l2bis->suiv;
     }
     return nouv;
@@ -223,4 +220,19 @@ T_liste addBehind(T_liste debut,T_liste suite){
         start->prec=end;
         return debut;
     }
+}
+
+T_liste findCell(T_liste l, Tunite *data){
+    int verif = 0;
+    T_liste temp = l;
+    while(temp != NULL && verif != 1){
+        if(temp->pdata != data){
+            temp = temp->suiv;
+        }
+        else{
+            verif = 1;
+            printf("ok");
+        }
+    }
+    return temp;
 }

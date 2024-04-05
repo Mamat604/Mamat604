@@ -23,19 +23,20 @@ typedef struct {
                             //0 = a déjà attaqué, 1 = peut attaquer ce tour-ci
                             // à remettre à 1 au début de chaque tour
     int coutEnElixir;
+    int team; // 1 = équipe bleue (du bas) 2 = équipe rouge (du haut)
 } Tunite;
 
 typedef struct T_Cell{
-    struct T_Cell *prec;
     struct T_Cell *suiv;
+    struct T_Cell *prec;
     Tunite *pdata; //pointeur vers une unité
-} T_Cellule;
+} *T_liste;
 
-typedef T_Cellule *T_liste;
 typedef T_liste TListePlayer;
+
 //getters
 TListePlayer getSuivant(TListePlayer x);
-Tunite* getPdata(TListePlayer x);
+Tunite *getPdata(TListePlayer x);
 TuniteDuJeu getNom(Tunite *x);
 Tcible getCibleAttaquable(Tunite *x);
 Tcible getMaPosition(Tunite *x);
@@ -48,10 +49,10 @@ int getPosx(Tunite *x);
 int getPosy(Tunite *x);
 int getPeutAttaquer(Tunite *x);
 int getCoutElixir(Tunite *x);
+int getTeam(Tunite *x);
 
 //setters
-void setPrec(TListePlayer x, TListePlayer y);
-void setSuiv(TListePlayer x, TListePlayer y);
+void setSuivant(TListePlayer x, TListePlayer y);
 void setPdata(TListePlayer x, Tunite *y);
 void setNomU(Tunite *x, TuniteDuJeu nouv);
 void setCibleAttaquable(Tunite *x, Tcible attaque);
@@ -65,5 +66,6 @@ void setPosX(Tunite *x, int xi);
 void setPosY(Tunite *x, int yi);
 void setPeutAttaquer(Tunite *x, int oof);
 void setCoutElixir(Tunite *x, int prix);
+void setTeam(Tunite *x, int equipe);
 
 #endif
